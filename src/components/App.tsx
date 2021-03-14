@@ -61,6 +61,7 @@ const App = () => {
 
   return (
     <div>
+      <button className="button button-format is-primary is-small">Format</button>
       <CodeEditor
         initialValue="const a = 1;"
         onChange={(value) => {
