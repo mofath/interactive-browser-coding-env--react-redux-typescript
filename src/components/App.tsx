@@ -5,11 +5,12 @@ import { useState, useEffect, useRef } from "react";
 import { unpkgPathPlugin } from "../plugins/unpkg-path-plugin";
 import { fetchPlugin } from "../plugins/fetch-plugin";
 import CodeEditor from "./code-editor";
+import Preview from "./preview";
 
 const App = () => {
   const ref = useRef<any>();
-  const iframe = useRef<any>();
   const [input, setInput] = useState("");
+  const [code, setCode] = useState("");
 
   const startService = async () => {
     ref.current = await esbuild.startService({
@@ -37,52 +38,24 @@ const App = () => {
       },
     });
 
-    iframe.current.contentWindow.postMessage(result.outputFiles[0].text, "*");
+    setCode(result.outputFiles[0].text);
   };
-
-  const html = `
-    <html>
-      <head></head>
-      <body>
-        <div id="root"></div>
-        <script>
-          window.addEventListener('message', (event) => {
-            try {
-              eval(event.data);
-            } catch (err) {
-              const root = document.querySelector('#root'); 
-              root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>';
-              console.error(err);
-            }
-          }, false);
-        </script>
-      </body>
-    </html>
-  `;
 
   return (
     <div className="editor-wrapper">
-      <button className="button button-format is-primary is-small">Format</button>
+      <button className="button button-format is-primary is-small">
+        Format
+      </button>
       <CodeEditor
         initialValue="const a = 1;"
         onChange={(value) => {
-          console.log(value);
           setInput(value);
         }}
       />
-      <textarea
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      ></textarea>
       <div>
         <button onClick={onClick}>Submit</button>
       </div>
-      <iframe
-        ref={iframe}
-        sandbox="allow-scripts"
-        srcDoc={html}
-        title="previewer"
-      />
+      <Preview code={code} />
     </div>
   );
 };
