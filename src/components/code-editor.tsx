@@ -1,3 +1,4 @@
+import './code-editor.css'
 import Editor, { OnMount } from "@monaco-editor/react";
 
 interface CodeEditorProps {

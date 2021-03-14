@@ -1,4 +1,5 @@
 import "bulmaswatch/superhero/bulmaswatch.min.css";
+import "bulmaswatch/superhero/bulmaswatch.min.css";
 import * as esbuild from "esbuild-wasm";
 import { useState, useEffect, useRef } from "react";
 import { unpkgPathPlugin } from "../plugins/unpkg-path-plugin";
@@ -60,7 +61,7 @@ const App = () => {
   `;
 
   return (
-    <div>
+    <div className="editor-wrapper">
       <button className="button button-format is-primary is-small">Format</button>
       <CodeEditor
         initialValue="const a = 1;"
