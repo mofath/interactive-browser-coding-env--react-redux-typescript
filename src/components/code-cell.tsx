@@ -5,7 +5,7 @@ import CodeEditor from "./code-editor";
 import Preview from "./preview";
 import bundle from "../bundler";
 
-const App = () => {
+const CodeCell = () => {
   const [input, setInput] = useState("");
   const [code, setCode] = useState("");
 
@@ -33,4 +33,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default CodeCell;

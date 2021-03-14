@@ -1,4 +1,12 @@
 import ReactDOM from "react-dom";
-import App from "./components/App";
+import CodeCell from "./components/code-cell";
+
+const App = () => {
+  return (
+    <div>
+      <CodeCell />
+    </div>
+  );
+};
 
 ReactDOM.render(<App />, document.querySelector("#root"));
